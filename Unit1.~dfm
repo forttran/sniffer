@@ -1,6 +1,6 @@
 object Form1: TForm1
-  Left = 725
-  Top = 289
+  Left = 294
+  Top = 232
   Width = 1248
   Height = 598
   Caption = 'Form1'
@@ -31,7 +31,8 @@ object Form1: TForm1
     Height = 553
     ColCount = 13
     FixedCols = 0
-    RowCount = 2
+    RowCount = 1
+    FixedRows = 0
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goRowSelect]
     TabOrder = 1
     OnMouseDown = StringGrid1MouseDown
@@ -150,6 +151,7 @@ object Form1: TForm1
     ColCount = 10
     DefaultColWidth = 30
     RowCount = 7
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing]
     TabOrder = 5
   end
 end

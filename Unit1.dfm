@@ -1,8 +1,8 @@
 object Form1: TForm1
-  Left = 731
-  Top = 289
-  Width = 1248
-  Height = 598
+  Left = 297
+  Top = 145
+  Width = 1232
+  Height = 680
   Caption = 'Form1'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -25,17 +25,32 @@ object Form1: TForm1
     OnClick = Button1Click
   end
   object StringGrid1: TStringGrid
-    Left = 376
+    Left = 696
     Top = 8
-    Width = 857
-    Height = 553
-    ColCount = 13
+    Width = 521
+    Height = 633
+    ColCount = 12
+    DefaultColWidth = 40
+    DefaultRowHeight = 22
     FixedCols = 0
     RowCount = 1
     FixedRows = 0
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goRowSelect]
     TabOrder = 1
     OnMouseDown = StringGrid1MouseDown
+    ColWidths = (
+      21
+      26
+      58
+      31
+      40
+      25
+      17
+      28
+      22
+      40
+      91
+      90)
   end
   object init: TGroupBox
     Left = 104
@@ -134,23 +149,34 @@ object Form1: TForm1
     TabOrder = 3
     OnClick = Button2Click
   end
-  object Memo1: TMemo
-    Left = 32
-    Top = 176
-    Width = 337
-    Height = 113
-    Lines.Strings = (
-      'Memo1')
-    TabOrder = 4
-  end
   object StringGrid2: TStringGrid
-    Left = 34
-    Top = 312
-    Width = 319
-    Height = 249
-    ColCount = 10
+    Left = 10
+    Top = 184
+    Width = 679
+    Height = 457
+    ColCount = 18
     DefaultColWidth = 30
-    RowCount = 7
-    TabOrder = 5
+    RowCount = 10
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing]
+    TabOrder = 4
+    ColWidths = (
+      30
+      30
+      30
+      30
+      30
+      30
+      30
+      30
+      30
+      30
+      30
+      30
+      30
+      30
+      30
+      30
+      30
+      128)
   end
 end

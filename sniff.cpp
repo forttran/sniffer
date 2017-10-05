@@ -1,5 +1,6 @@
 //---------------------------------------------------------------------------
 #pragma hdrstop
+#include <vcl.h>
 #include "sniff.h"
 #include "mstcpip.h"
 #include "Unit1.h"
@@ -92,12 +93,8 @@ void* TSnif::printlist(IPHeader *hdr){
       Form1->StringGrid1->Cells[9][cnt]=ntohs(hdr->xsum);
       Form1->StringGrid1->Cells[10][cnt]=nethost2str(hdr->src);
       Form1->StringGrid1->Cells[11][cnt]=nethost2str(hdr->dest);
-      Form1->StringGrid1->Cells[12][cnt]=(char *)&(hdr->data);
-
-
-      Form1->Memo1->Lines->Add((char)(&(hdr->data)+1));
-      Form1->Memo1->Lines->Add("_______________________");
     //}
+    return 0;
 }
 
 void *TSnif::printinit(){
@@ -105,11 +102,41 @@ void *TSnif::printinit(){
   Form1->Edit2->Text=hostname;
   Form1->Edit3->Text=nethost2str(socketAddress.sin_addr.s_addr);
   Form1->Edit4->Text=nethost2str(watch_host);
+  return 0;
 }
 
 void *TSnif::initlms(){
    lms = new listItems(sniff());
+   return 0;
 }
 void *TSnif::iterationlms(){
   lms->addItem(sniff());
+  return 0;
+}
+
+void *TSnif::printhex(IPHeader * hdr){
+  FILE * ptrFile = fopen( "file.txt" , "wb");
+  fwrite((char *)&hdr->data, 1, ntohs(hdr->length), ptrFile);
+  fclose (ptrFile);
+
+  char str[2];
+  int cnt;
+  byte *c;
+  c = (byte *)malloc(ntohs(hdr->length));
+  memcpy((void *)c, &hdr->data,ntohs(hdr->length));
+  cnt = (int)ntohs(hdr->length)/16+1;
+  Form1->StringGrid2->RowCount = cnt;
+  for(int i=0; i<=cnt;i++){
+    char s[18]={0};
+    sprintf (str, "%02X", i);
+    Form1->StringGrid2->Cells[0][i+1] = str;
+    for(int j=0; j<16; j++){
+      sprintf (str, "%02X", c[i*16+j]);
+      s[j] = (c[i*16+j]<127&&c[i*16+j]>31)?(char)c[i*16+j]:'.';
+      Form1->StringGrid2->Cells[j+1][i+1] = str;
+    }
+
+    Form1->StringGrid2->Cells[17][i+1] = s;
+  }
+  return 0;
 }

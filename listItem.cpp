@@ -1,24 +1,42 @@
 //---------------------------------------------------------------------------
 #pragma hdrstop
+#include <vcl.h>
 #include "listItem.h"
 //---------------------------------------------------------------------------
 
 #pragma package(smart_init)
 listItems::listItems(IPHeader *hdr){
-  // выделение памяти под корень списка
-  listItems::lst = (struct list*)malloc(sizeof(struct list));
-  listItems::lst->hdr = hdr;
-  listItems::lst->next = NULL; // указатель на следующий узел
-  listItems::lst->prev = NULL; // указатель на предыдущий узел
+  listItems::lst =(struct list*)malloc(sizeof(struct list));
+  lst->hdr = hdr;
+  lst->next = NULL;
+  lst->prev = NULL;
+
+  listItems::head = listItems::lst;
+  listItems::tail = listItems::lst;
 }
-struct list* listItems::addItem(IPHeader *hdr){
+struct list *listItems::addItem(IPHeader *hdr){
   struct list *temp, *p;
-  temp = listItems::lst;
-  listItems::lst->next = temp;
-  listItems::lst->prev = NULL;
-  listItems::lst->hdr = hdr;
-  temp->prev = listItems::lst;
+  temp = (struct list*)malloc(sizeof(list));
+  p = lst->next; // сохранение указателя на следующий узел
+  lst->next = temp; // предыдущий узел указывает на создаваемый
+  temp->hdr = hdr; // сохранение поля данных добавляемого узла
+  temp->next = p; // созданный узел указывает на следующий узел
+  temp->prev = lst; // созданный узел указывает на предыдущий узел
+  if (p != NULL)
+    p->prev = temp;
+  lst = temp;
+  listItems::tail = lst;
+  return listItems::tail;
+}
+IPHeader *listItems::StringItem(int index){
+  struct list *temp=head;
+  int i = 1;
+  while(1){
+    if(i == index) return temp->hdr;
+    temp=temp->next;
+    i++;
+  }
 }
 listItems::~listItems(){
-   free(listItems::lst);
+   free(listItems::head);
 }

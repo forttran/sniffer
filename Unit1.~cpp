@@ -19,7 +19,7 @@ __fastcall TForm1::TForm1(TComponent* Owner)
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::FormCreate(TObject *Sender){
-  sniffer = new TSnif(Form1);
+  sniffer = new TSnif();
   sniffer->printinit();
 }
 //---------------------------------------------------------------------------
@@ -42,8 +42,9 @@ void __fastcall TForm1::StringGrid1MouseDown(TObject *Sender,
       TMouseButton Button, TShiftState Shift, int X, int Y){
   int ACol, ARow;
   StringGrid1->MouseToCell(X, Y, ACol, ARow);
-  ShowMessage(Form1->StringGrid1->Cells[12][ARow]);
-
+  if(ARow>0){
+    IPHeader * hdr = sniffer->lms->StringItem(ARow);
+    sniffer->printhex(hdr);
+  }
 }
 //---------------------------------------------------------------------------
-

@@ -24,7 +24,6 @@ __published:	// IDE-managed Components
         TStringGrid *StringGrid1;
         TGroupBox *init;
         TButton *Button2;
-        TMemo *Memo1;
         TStringGrid *StringGrid2;
         void __fastcall FormCreate(TObject *Sender);
         void __fastcall Button1Click(TObject *Sender);

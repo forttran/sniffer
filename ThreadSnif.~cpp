@@ -27,9 +27,10 @@ __fastcall ThreadSnif::ThreadSnif(bool CreateSuspended, TSnif *sniff)
 //---------------------------------------------------------------------------
 void __fastcall ThreadSnif::Execute(){
   sniffer->initlms();
+  sniffer->printlist(sniffer->lms->lst->hdr);
   while(!Terminated){
-    sniffer->lms->addItem(sniffer->sniff());
-    sniffer->printlist(sniffer->lms->lst->hdr);
+    sniffer->iterationlms();
+    sniffer->printlist(sniffer->lms->lastlst->hdr);
   }
 }
 //---------------------------------------------------------------------------

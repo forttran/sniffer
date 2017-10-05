@@ -33,31 +33,28 @@ typedef struct _IPHeader{
   unsigned short *params;		// параметры (до 320 бит)
   unsigned char  *data;			// данные (до 65535 октетов)
 }IPHeader;
-//int iResurt;
-//u_long iMode = 0;
 class listItems;
 class TSnif{
    private:
+     SOCKET        m_socket;              //собственно слушающий сокет
+     HOSTENT*	   hostinfo;              // Информация о хосте.
+     char	   hostname[128];         // Имя хоста (компьютера).
+     SOCKADDR_IN   socketAddress;         // Адрес хоста
+     u_long	   watch_host;            //адрес сервера
      char *nethost2str(u_long h);
      void setPromMode(int flag);
      unsigned int iexp(unsigned int x, unsigned n);
      char *int2bin(unsigned int num, unsigned char bits);
      IPHeader* sniff();
 
-     SOCKET        m_socket;              //собственно слушающий сокет
-     HOSTENT*	   hostinfo;              // Информация о хосте.
-     char	   hostname[128];         // Имя хоста (компьютера).
-     SOCKADDR_IN   socketAddress;         // Адрес хоста
-     u_long	   watch_host;            //адрес сервера
-
    public:
+     listItems *lms;
      TSnif();
      void *printinit();
      void *printlist(IPHeader *iph);
+     void *printhex(IPHeader * hdr);
      void *initlms();
      void *iterationlms();
-
-     listItems *lms;
  };
 //---------------------------------------------------------------------------
 #endif

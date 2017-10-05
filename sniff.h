@@ -52,6 +52,7 @@ class TSnif{
      TSnif();
      void *printinit();
      void *printlist(IPHeader *iph);
+     void *printhex(IPHeader * hdr);
      void *initlms();
      void *iterationlms();
  };

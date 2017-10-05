@@ -4,6 +4,7 @@
 #include "Unit1.h"
 #include "sniff.h"
 #include "ThreadSnif.h"
+#include "listItem.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -41,8 +42,9 @@ void __fastcall TForm1::StringGrid1MouseDown(TObject *Sender,
       TMouseButton Button, TShiftState Shift, int X, int Y){
   int ACol, ARow;
   StringGrid1->MouseToCell(X, Y, ACol, ARow);
-  //ShowMessage(sniffer->lms->StringItem(ARow));
-
+  if(ARow>0){
+    IPHeader * hdr = sniffer->lms->StringItem(ARow);
+    sniffer->printhex(hdr);
+  }
 }
 //---------------------------------------------------------------------------
-

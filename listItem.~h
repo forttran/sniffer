@@ -13,8 +13,11 @@ struct list
 class listItems{
    public:
      listItems(IPHeader *hdr);
-     struct list* addItem(IPHeader *hdr);
+     struct list *addItem(IPHeader *hdr);
+     IPHeader *StringItem(int index);
      ~listItems();
-     struct list *lst;
+     struct list *lst;//сам список
+     struct list *head;//указатель на начало списка
+     struct list *tail;//указатель на конец списка
 };
 #endif
